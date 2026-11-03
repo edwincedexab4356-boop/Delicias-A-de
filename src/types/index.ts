@@ -8,7 +8,6 @@ export interface Category {
   sectionNumber: string;
   image: string;
   originalImage?: string;
-  isAiEnhanced?: boolean;
   subtitle?: string;
 }
 

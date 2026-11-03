@@ -17,9 +17,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   const { addToCart } = useCart();
   const [addedItemKey, setAddedItemKey] = useState<string | null>(null);
   const [missingPrepProductId, setMissingPrepProductId] = useState<string | null>(null);
-  const [showAiEnhanced, setShowAiEnhanced] = useState<boolean>(true);
 
-  const activeImage = (showAiEnhanced && category.image) ? category.image : (category.originalImage || category.image);
+  const activeImage = category.image;
 
   // Selected preparation per product ID (default to first option so customer has a convenient default)
   const [selectedPreps, setSelectedPreps] = useState<Record<string, string>>(() => {
@@ -92,36 +91,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#081321] via-[#081321]/40 to-black/25 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081321]/90 via-[#081321]/25 to-transparent pointer-events-none" />
 
-        {/* Optional 4K AI vs Real Photo View Toggle for sections with custom restaurant photos */}
-        {category.originalImage && (
-          <div className="absolute top-2.5 sm:top-6 right-2.5 sm:right-6 z-10 flex items-center gap-1 p-1 rounded-full bg-[#081321]/85 backdrop-blur-md border border-[#C5A880]/40 shadow-xl scale-90 sm:scale-100 origin-top-right">
-            <button
-              type="button"
-              onClick={() => setShowAiEnhanced(true)}
-              className={`px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
-                showAiEnhanced
-                  ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
-                  : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
-              }`}
-              title="Ver imagen con optimización fotográfica 4K IA"
-            >
-              <Sparkles className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-current" />
-              <span>Full 4K IA</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowAiEnhanced(false)}
-              className={`px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
-                !showAiEnhanced
-                  ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
-                  : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
-              }`}
-              title="Ver fotografía original del restaurante"
-            >
-              <span>Foto Original</span>
-            </button>
-          </div>
-        )}
 
         {/* Text Overlay inside the Panoramic Frame */}
         <div className="absolute inset-0 p-4 sm:p-10 md:p-14 flex flex-col justify-end">

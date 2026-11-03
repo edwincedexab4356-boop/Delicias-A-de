@@ -19,7 +19,6 @@ export const CATEGORIES: Category[] = [
     iconName: 'Fish',
     image: '/assets/images/pescados_banner_1793720054508.jpg',
     originalImage: '/assets/aistudio/WhatsApp_Image_2026-11-03_at_02.34.27__2__1ea5571f.jpeg',
-    isAiEnhanced: true,
   },
   {
     id: 'bandejas',
@@ -30,7 +29,6 @@ export const CATEGORIES: Category[] = [
     iconName: 'UtensilsCrossed',
     image: '/assets/images/bandejas_banner_1793720054590.jpg',
     originalImage: '/assets/aistudio/WhatsApp_Image_2026-11-03_at_02.34.26__1__47245f0f.jpeg',
-    isAiEnhanced: true,
   },
   {
     id: 'pollo',
