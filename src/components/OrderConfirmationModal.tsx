@@ -6,13 +6,10 @@ import {
   CheckCircle,
   MessageCircle,
   Store,
-  Bike,
+  UtensilsCrossed,
   AlertCircle,
   Scale,
-  ArrowRight,
-  Phone,
   User,
-  MapPin,
   FileText,
 } from 'lucide-react';
 
@@ -29,8 +26,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
-  const [diningOption, setDiningOption] = useState<'pickup' | 'delivery'>('pickup');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [diningOption, setDiningOption] = useState<'comer-en-el-lugar' | 'retirar-en-el-local'>('comer-en-el-lugar');
   const [orderNotes, setOrderNotes] = useState('');
 
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
@@ -52,10 +48,6 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 
     if (!customerPhone.trim()) {
       errors.phone = 'El número de teléfono es obligatorio.';
-    }
-
-    if (diningOption === 'delivery' && !deliveryAddress.trim()) {
-      errors.address = 'La dirección de entrega es obligatoria para envíos a domicilio.';
     }
 
     setValidationErrors(errors);
@@ -91,19 +83,15 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
       : `$${total.toFixed(2)} USD`;
 
     const modalidadText =
-      diningOption === 'pickup'
-        ? 'Retirar en el restaurante'
-        : 'Solicitar delivery a domicilio';
-
-    const addressSection =
-      diningOption === 'delivery' ? `Dirección: ${deliveryAddress.trim()}\n` : '';
+      diningOption === 'comer-en-el-lugar'
+        ? 'Comer en el lugar'
+        : 'Retirar en el local';
 
     // EXACT structure requested:
     // DELICIAS A DE - NUEVO PEDIDO
     // Cliente: [nombre]
     // Teléfono: [teléfono]
-    // Modalidad: [retiro/delivery]
-    // Dirección: [dirección si aplica]
+    // Modalidad: [Comer en el lugar / Retirar en el local]
     // DETALLE:
     // [Producto] x [cantidad]
     // Preparación: [opción]
@@ -115,7 +103,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 Cliente: ${customerName.trim()}
 Teléfono: ${customerPhone.trim()}
 Modalidad: ${modalidadText}
-${addressSection}
+
 DETALLE:
 ${detailLines}
 
@@ -191,16 +179,11 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
               <div className="flex justify-between font-medium text-[#FAF8F5] pb-2 border-b border-[#162C46]">
                 <span>Modalidad seleccionada</span>
                 <span className="text-[#C5A880] font-semibold">
-                  {diningOption === 'pickup'
-                    ? 'Retirar en el restaurante'
-                    : 'Delivery a domicilio'}
+                  {diningOption === 'comer-en-el-lugar'
+                    ? 'Comer en el lugar'
+                    : 'Retirar en el local'}
                 </span>
               </div>
-              {diningOption === 'delivery' && (
-                <div className="text-[#D2C4B2] text-[11px] pb-2 border-b border-[#162C46]">
-                  <span className="text-[#B8A58E]">Dirección:</span> {deliveryAddress}
-                </div>
-              )}
               <div className="space-y-1.5 text-[#D2C4B2] max-h-36 overflow-y-auto">
                 {cart.map((item, idx) => (
                   <div key={idx} className="flex justify-between items-start">
@@ -329,91 +312,51 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                 <span>2. Modalidad del Pedido</span>
               </h4>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={() => {
-                    setDiningOption('pickup');
-                    if (validationErrors.address) {
-                      setValidationErrors((prev) => ({ ...prev, address: '' }));
-                    }
-                  }}
+                  onClick={() => setDiningOption('comer-en-el-lugar')}
                   className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
-                    diningOption === 'pickup'
-                      ? 'bg-[#10223B] border-[#C5A880] shadow-md'
+                    diningOption === 'comer-en-el-lugar'
+                      ? 'bg-[#10223B] border-[#C5A880] shadow-md ring-1 ring-[#C5A880]/40'
+                      : 'bg-[#0B192C] border-[#183355] hover:border-[#C5A880]/40'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 text-xs font-semibold text-[#FAF8F5]">
+                    <UtensilsCrossed
+                      className={`w-4 h-4 ${
+                        diningOption === 'comer-en-el-lugar' ? 'text-[#C5A880]' : 'text-[#B8A58E]'
+                      }`}
+                    />
+                    <span>Comer en el lugar</span>
+                  </div>
+                  <span className="text-[11px] text-[#B8A58E] font-light">
+                    Servicio en salón o terraza
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setDiningOption('retirar-en-el-local')}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
+                    diningOption === 'retirar-en-el-local'
+                      ? 'bg-[#10223B] border-[#C5A880] shadow-md ring-1 ring-[#C5A880]/40'
                       : 'bg-[#0B192C] border-[#183355] hover:border-[#C5A880]/40'
                   }`}
                 >
                   <div className="flex items-center gap-2 text-xs font-semibold text-[#FAF8F5]">
                     <Store
                       className={`w-4 h-4 ${
-                        diningOption === 'pickup' ? 'text-[#C5A880]' : 'text-[#B8A58E]'
+                        diningOption === 'retirar-en-el-local' ? 'text-[#C5A880]' : 'text-[#B8A58E]'
                       }`}
                     />
-                    <span>Retirar en Restaurante</span>
+                    <span>Retirar en el local</span>
                   </div>
                   <span className="text-[11px] text-[#B8A58E] font-light">
-                    Pick-up directo en cocina
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setDiningOption('delivery')}
-                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
-                    diningOption === 'delivery'
-                      ? 'bg-[#10223B] border-[#C5A880] shadow-md'
-                      : 'bg-[#0B192C] border-[#183355] hover:border-[#C5A880]/40'
-                  }`}
-                >
-                  <div className="flex items-center gap-2 text-xs font-semibold text-[#FAF8F5]">
-                    <Bike
-                      className={`w-4 h-4 ${
-                        diningOption === 'delivery' ? 'text-[#C5A880]' : 'text-[#B8A58E]'
-                      }`}
-                    />
-                    <span>Solicitar Delivery</span>
-                  </div>
-                  <span className="text-[11px] text-[#B8A58E] font-light">
-                    Envío a tu domicilio
+                    Para llevar / Pick-up en barra
                   </span>
                 </button>
               </div>
-
-              {/* Dirección de entrega: únicamente si selecciona delivery */}
-              {diningOption === 'delivery' && (
-                <div className="animate-in fade-in slide-in-from-top-2 pt-1">
-                  <label
-                    htmlFor="delivery-address"
-                    className="block text-xs uppercase tracking-widest text-[#B8A58E] font-medium mb-1.5 flex items-center gap-1.5"
-                  >
-                    <MapPin className="w-3.5 h-3.5 text-[#C5A880]" />
-                    <span>Dirección de entrega completa *</span>
-                  </label>
-                  <input
-                    id="delivery-address"
-                    type="text"
-                    value={deliveryAddress}
-                    onChange={(e) => {
-                      setDeliveryAddress(e.target.value);
-                      if (validationErrors.address) {
-                        setValidationErrors((prev) => ({ ...prev, address: '' }));
-                      }
-                    }}
-                    placeholder="Calle, número de casa/apto, urbanización, punto de referencia..."
-                    className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
-                      validationErrors.address
-                        ? 'border-rose-500 focus:border-rose-400'
-                        : 'border-[#183355] focus:border-[#C5A880]'
-                    }`}
-                  />
-                  {validationErrors.address && (
-                    <span className="text-[11px] text-rose-400 mt-1 block">
-                      {validationErrors.address}
-                    </span>
-                  )}
-                </div>
-              )}
             </div>
 
             {/* Observaciones adicionales */}

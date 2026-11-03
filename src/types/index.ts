@@ -46,7 +46,7 @@ export interface CartItem {
 
 export interface OrderDetails {
   customerName: string;
-  diningOption: 'dine-in' | 'takeout';
-  tableOrAddress: string;
+  diningOption: 'comer-en-el-lugar' | 'retirar-en-el-local';
+  customerPhone?: string;
   notes?: string;
 }

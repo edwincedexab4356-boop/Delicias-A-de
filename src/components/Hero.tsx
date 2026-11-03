@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, Waves, Sparkles, Clock, Anchor } from 'lucide-react';
+import { ArrowDown, Waves, Sparkles, Clock } from 'lucide-react';
 
 interface HeroProps {
   onExploreClick: () => void;
@@ -27,15 +27,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
 
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Subtle Pre-header Kicker */}
-        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#10223B]/80 backdrop-blur-md border border-[#C5A880]/40 mb-6">
-          <Anchor className="w-3.5 h-3.5 text-[#C5A880]" />
-          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-[#FAF8F5]">
-            Fotografías 100% Reales &middot; Cocina Frente al Mar
-          </span>
-          <Sparkles className="w-3 h-3 text-[#C5A880]" />
-        </div>
-
         {/* Main Restaurant Brand Name */}
         <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.06em] text-[#FAF8F5] leading-[1.08] mb-4">
           DELICIAS A DE
