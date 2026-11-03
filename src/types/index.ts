@@ -7,6 +7,8 @@ export interface Category {
   iconName: string;
   sectionNumber: string;
   image: string;
+  originalImage?: string;
+  isAiEnhanced?: boolean;
   subtitle?: string;
 }
 

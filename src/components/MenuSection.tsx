@@ -17,8 +17,11 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   const { addToCart } = useCart();
   const [addedItemKey, setAddedItemKey] = useState<string | null>(null);
   const [missingPrepProductId, setMissingPrepProductId] = useState<string | null>(null);
+  const [showAiEnhanced, setShowAiEnhanced] = useState<boolean>(true);
 
-  // Selected preparation per product ID (default to first option so customer has a convenient default, but can freely switch)
+  const activeImage = (showAiEnhanced && category.image) ? category.image : (category.originalImage || category.image);
+
+  // Selected preparation per product ID (default to first option so customer has a convenient default)
   const [selectedPreps, setSelectedPreps] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {};
     products.forEach((p) => {
@@ -69,47 +72,79 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       id={`section-${category.id}`}
       className="mb-20 sm:mb-28 scroll-mt-24 transition-all"
     >
-      {/* 1. Large Panoramic Category Photograph */}
-      <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] md:aspect-[24/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#C5A880]/30 group mb-8 sm:mb-12 bg-[#050C16]">
+      {/* 1. Large Panoramic Category Photograph (Ultra Sharp 4K Style Presentation) */}
+      <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] md:aspect-[24/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#C5A880]/35 group mb-8 sm:mb-12 bg-[#050C16]">
         <img
-          src={category.image}
-          alt={`Gastronomía de ${category.name} en DELICIAS A DE`}
-          loading="lazy"
-          className="w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.08] transition-transform duration-1000 ease-out group-hover:scale-103"
+          src={activeImage}
+          alt={`Gastronomía representativa de ${category.name} en DELICIAS A DE`}
+          referrerPolicy="no-referrer"
+          loading="eager"
+          className="w-full h-full object-cover object-center filter contrast-[1.05] saturate-[1.08] brightness-[0.82] transition-all duration-700 ease-out group-hover:scale-102"
         />
 
-        {/* Cinematic gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#081321] via-[#081321]/40 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081321]/90 via-[#081321]/30 to-transparent" />
+        {/* Cinematic gradient overlays: deep ocean vignette, keeping image center ultra vivid */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081321] via-[#081321]/40 to-black/25 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#081321]/90 via-[#081321]/25 to-transparent pointer-events-none" />
+
+        {/* Optional 4K AI vs Real Photo View Toggle for sections with custom restaurant photos */}
+        {category.originalImage && (
+          <div className="absolute top-4 sm:top-6 right-4 sm:right-6 z-10 flex items-center gap-1 p-1 rounded-full bg-[#081321]/85 backdrop-blur-md border border-[#C5A880]/40 shadow-xl">
+            <button
+              type="button"
+              onClick={() => setShowAiEnhanced(true)}
+              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
+                showAiEnhanced
+                  ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
+                  : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
+              }`}
+              title="Ver imagen con optimización fotográfica 4K IA"
+            >
+              <Sparkles className="w-3 h-3 fill-current" />
+              <span>Full 4K IA</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowAiEnhanced(false)}
+              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
+                !showAiEnhanced
+                  ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
+                  : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
+              }`}
+              title="Ver fotografía original del restaurante"
+            >
+              <span>Foto Original</span>
+            </button>
+          </div>
+        )}
 
         {/* Text Overlay inside the Panoramic Frame */}
         <div className="absolute inset-0 p-6 sm:p-10 md:p-14 flex flex-col justify-end">
           <div className="max-w-2xl">
             {/* Section Number & Kicker */}
             <div className="flex items-center gap-3 mb-2">
-              <span className="font-mono text-xs sm:text-sm font-bold text-[#C5A880] tracking-[0.25em] uppercase px-2.5 py-0.5 rounded bg-[#081321]/80 border border-[#C5A880]/40 backdrop-blur-sm">
+              <span className="font-mono text-xs sm:text-sm font-bold text-[#C5A880] tracking-[0.25em] uppercase px-3 py-1 rounded-md bg-[#081321]/85 border border-[#C5A880]/40 backdrop-blur-md shadow-lg">
                 SECCIÓN {category.sectionNumber}
               </span>
-              <span className="h-px w-10 sm:w-16 bg-[#C5A880]/50" />
-              <span className="text-[11px] sm:text-xs text-[#FAF8F5]/80 uppercase tracking-widest hidden sm:inline">
+              <span className="h-px w-10 sm:w-16 bg-[#C5A880]/60" />
+              <span className="text-[11px] sm:text-xs text-[#FAF8F5]/90 uppercase tracking-widest font-medium hidden sm:inline drop-shadow">
                 {category.subtitle}
               </span>
             </div>
 
             {/* Category Title */}
-            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#FAF8F5] tracking-wide font-normal leading-tight">
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#FAF8F5] tracking-wide font-normal leading-tight drop-shadow-md">
               {category.name}
             </h2>
 
             {/* Tagline */}
-            <p className="text-xs sm:text-sm md:text-base text-[#E7DFD5]/90 mt-2 font-light line-clamp-2 max-w-xl">
+            <p className="text-xs sm:text-sm md:text-base text-[#E7DFD5] mt-2 font-light line-clamp-2 max-w-xl drop-shadow">
               {category.tagline}
             </p>
           </div>
         </div>
       </div>
 
-      {/* 2. The Luxury Menu Sheet (Carta Gastronómica Elegante) */}
+      {/* 2. The Luxury Menu Sheet (Carta Gastronómica Elegante Sin Fotos en Cada Plato) */}
       <div className="relative bg-[#0B192C]/90 border border-[#162C46] rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-14 shadow-2xl shadow-black/40">
         {/* Decorative Golden Corner Accents */}
         <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#C5A880]/30 pointer-events-none rounded-tl-sm" />
@@ -130,7 +165,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           </p>
         </div>
 
-        {/* Dishes List (Listado alineado estilo carta de lujo) */}
+        {/* Dishes List (Listado editorial puro: nombres a la izquierda, precios a la derecha) */}
         <div className="space-y-6 sm:space-y-7">
           {products.map((product) => {
             const currentPrep = selectedPreps[product.id];
@@ -146,9 +181,9 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                     : 'border-[#162C46]/60 hover:border-[#C5A880]/30'
                 }`}
               >
-                {/* Main Row: Dish name + Leader Dots + Price + Discrete Add Button */}
+                {/* Main Row: Dish Name & Description + Leader Dots + Price + Discrete Add Button */}
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-4">
-                  {/* Left: Dish Name & Badges */}
+                  {/* Left: Dish Name & Badges & Description */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <h4
@@ -180,7 +215,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   </div>
 
                   {/* Middle Dotted Leader Line (Visible on tablet/desktop) */}
-                  <div className="hidden md:block flex-1 border-b border-dotted border-[#183355]/80 mx-2 self-center" />
+                  <div className="hidden md:block flex-1 border-b border-dotted border-[#183355]/80 mx-3 self-center" />
 
                   {/* Right: Price & Discrete Add Control */}
                   <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0 mt-2 sm:mt-0">

@@ -11,9 +11,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
       {/* Background Image with layered gradient overlays */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&w=2400&q=85"
-          alt="Alta gastronomía de mariscos y pescados en DELICIAS A DE"
-          className="w-full h-full object-cover object-center scale-105 filter brightness-[0.7] contrast-[1.05]"
+          src="/assets/aistudio/WhatsApp_Image_2026-11-03_at_02.34.27__1__c4feba61.jpeg"
+          alt="Alta gastronomía y terraza frente al mar en DELICIAS A DE"
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover object-center scale-105 filter brightness-[0.62] contrast-[1.08]"
         />
         {/* Editorial Gradients: Deep ocean blues, subtle gold tone warming, vignette */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#081321] via-[#081321]/60 to-[#050C16]/85" />
@@ -27,10 +28,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Subtle Pre-header Kicker */}
-        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#10223B]/60 backdrop-blur-md border border-[#C5A880]/30 mb-6">
+        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#10223B]/80 backdrop-blur-md border border-[#C5A880]/40 mb-6">
           <Anchor className="w-3.5 h-3.5 text-[#C5A880]" />
-          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-[#FAF8F5]/90">
-            Cocina del Mar &middot; Temporada 2026
+          <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-[#FAF8F5]">
+            Fotografías 100% Reales &middot; Cocina Frente al Mar
           </span>
           <Sparkles className="w-3 h-3 text-[#C5A880]" />
         </div>
