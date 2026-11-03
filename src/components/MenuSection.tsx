@@ -79,6 +79,12 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           alt={`Gastronomía representativa de ${category.name} en DELICIAS A DE`}
           referrerPolicy="no-referrer"
           loading="eager"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (category.originalImage && target.src !== category.originalImage) {
+              target.src = category.originalImage;
+            }
+          }}
           className="w-full h-full object-cover object-center filter contrast-[1.05] saturate-[1.08] brightness-[0.82] transition-all duration-700 ease-out group-hover:scale-102"
         />
 
