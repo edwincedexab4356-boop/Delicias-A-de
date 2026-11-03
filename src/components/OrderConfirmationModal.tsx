@@ -68,11 +68,14 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
         const prepLine = item.selectedPreparation
           ? `\nPreparación: ${item.selectedPreparation}`
           : '';
+        const instructionLine = item.specialInstructions?.trim()
+          ? `\nDescripción: ${item.specialInstructions.trim()}`
+          : '';
         const subtotalText = item.requiresPriceConfirmation
           ? 'Precio según tamaño (por confirmar con cocina)'
           : `$${(item.itemPrice * item.quantity).toFixed(2)} USD`;
 
-        return `${item.product.name} x ${item.quantity}${prepLine}\nSubtotal: ${subtotalText}`;
+        return `${item.product.name} x ${item.quantity}${prepLine}${instructionLine}\nSubtotal: ${subtotalText}`;
       })
       .join('\n\n');
 
@@ -87,18 +90,8 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
         ? 'Comer en el lugar'
         : 'Retirar en el local';
 
-    // EXACT structure requested:
-    // DELICIAS A DE - NUEVO PEDIDO
-    // Cliente: [nombre]
-    // Teléfono: [teléfono]
-    // Modalidad: [Comer en el lugar / Retirar en el local]
-    // DETALLE:
-    // [Producto] x [cantidad]
-    // Preparación: [opción]
-    // Subtotal: $[importe]
-    // TOTAL: $[total]
-    // Observaciones: [comentarios]
-    const message = `${RESTAURANT_NAME} - NUEVO PEDIDO
+    // Base order message
+    let message = `${RESTAURANT_NAME} - NUEVO PEDIDO
 
 Cliente: ${customerName.trim()}
 Teléfono: ${customerPhone.trim()}
@@ -107,9 +100,12 @@ Modalidad: ${modalidadText}
 DETALLE:
 ${detailLines}
 
-TOTAL: ${formattedTotal}
+TOTAL: ${formattedTotal}`;
 
-Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
+    // Incluir descripción / observaciones únicamente si el cliente las especificó
+    if (orderNotes.trim()) {
+      message += `\n\nObservaciones: ${orderNotes.trim()}`;
+    }
 
     // Clean phone number (strip spaces, +, -, parentheses)
     const cleanPhone = RESTAURANT_WHATSAPP_PHONE.replace(/[^0-9]/g, '');
@@ -366,14 +362,14 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                 className="block text-xs uppercase tracking-widest text-[#B8A58E] font-medium mb-1.5 flex items-center gap-1.5"
               >
                 <FileText className="w-3.5 h-3.5 text-[#C5A880]" />
-                <span>Observaciones adicionales (opcional)</span>
+                <span>Descripción u observaciones (opcional)</span>
               </label>
               <textarea
                 id="checkout-notes"
                 rows={2}
                 value={orderNotes}
                 onChange={(e) => setOrderNotes(e.target.value)}
-                placeholder="Ej: Salsa picante aparte, llamar al llegar, etc..."
+                placeholder="Ej: Salsa aparte, llamar al llegar, especificaciones, etc..."
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors resize-none"
               />
             </div>
@@ -412,6 +408,12 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                         {item.selectedPreparation && (
                           <span className="text-[10px] text-[#C5A880] block mt-0.5 font-medium">
                             Preparación: {item.selectedPreparation}
+                          </span>
+                        )}
+
+                        {item.specialInstructions && (
+                          <span className="text-[10px] text-[#D2C4B2] block mt-0.5 italic">
+                            Nota: {item.specialInstructions}
                           </span>
                         )}
 
