@@ -127,18 +127,18 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
         onClick={onClose}
         className="fixed inset-0 bg-[#050C16]/85 backdrop-blur-md transition-opacity"
       />
 
-      <div className="relative bg-[#081321] border border-[#C5A880]/40 rounded-2xl sm:rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl z-10 my-4 sm:my-8 animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative bg-[#081321] border border-[#C5A880]/40 rounded-2xl sm:rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl z-10 my-2 sm:my-8 animate-in fade-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="p-5 sm:p-6 border-b border-[#162C46] flex items-center justify-between bg-[#0B192C]/70">
+        <div className="p-4 sm:p-6 border-b border-[#162C46] flex items-center justify-between bg-[#0B192C]/70">
           <div className="flex items-center gap-3">
-            <span className="font-serif text-xl sm:text-2xl text-[#FAF8F5] font-medium">
+            <span className="font-serif text-lg sm:text-2xl text-[#FAF8F5] font-medium">
               {orderSubmitted ? '¡Pedido Enviado!' : 'Checkout · Finalizar Pedido'}
             </span>
           </div>
@@ -258,7 +258,7 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                       }
                     }}
                     placeholder="Ej: Sofía Velásquez"
-                    className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
+                    className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
                       validationErrors.name
                         ? 'border-rose-500 focus:border-rose-400'
                         : 'border-[#183355] focus:border-[#C5A880]'
@@ -290,7 +290,7 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                       }
                     }}
                     placeholder="Ej: +507 6123-4567"
-                    className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
+                    className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
                       validationErrors.phone
                         ? 'border-rose-500 focus:border-rose-400'
                         : 'border-[#183355] focus:border-[#C5A880]'
@@ -374,7 +374,7 @@ Observaciones: ${orderNotes.trim() ? orderNotes.trim() : 'Ninguna'}`;
                 value={orderNotes}
                 onChange={(e) => setOrderNotes(e.target.value)}
                 placeholder="Ej: Salsa picante aparte, llamar al llegar, etc..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors resize-none"
               />
             </div>
 

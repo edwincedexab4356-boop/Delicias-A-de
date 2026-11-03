@@ -50,12 +50,12 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
         </p>
       </div>
 
-      {/* Filter Tabs / Segmented Controller */}
-      <div className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar pb-2 px-2 gap-2 sm:gap-3">
+      {/* Filter Tabs / Segmented Controller (Smooth Horizontal Touch Carousel on Mobile) */}
+      <div className="flex items-center justify-start md:justify-center overflow-x-auto scroll-smooth no-scrollbar pb-3 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 gap-2 sm:gap-3 touch-pan-x">
         {/* 'Todos' Tab */}
         <button
           onClick={() => onSelectCategory('all')}
-          className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full text-xs uppercase tracking-wider font-medium transition-all duration-300 ${
+          className={`shrink-0 flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs uppercase tracking-wider font-medium transition-all duration-300 touch-manipulation cursor-pointer ${
             activeCategory === 'all'
               ? 'bg-[#C5A880] text-[#081321] font-bold shadow-md shadow-[#C5A880]/20'
               : 'bg-[#10223B]/70 hover:bg-[#183355] text-[#E7DFD5] border border-[#183355] hover:border-[#C5A880]/40'

@@ -70,10 +70,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   return (
     <section
       id={`section-${category.id}`}
-      className="mb-20 sm:mb-28 scroll-mt-24 transition-all"
+      className="mb-14 sm:mb-28 scroll-mt-20 sm:scroll-mt-24 transition-all"
     >
       {/* 1. Large Panoramic Category Photograph (Ultra Sharp 4K Style Presentation) */}
-      <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] md:aspect-[24/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#C5A880]/35 group mb-8 sm:mb-12 bg-[#050C16]">
+      <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[24/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#C5A880]/35 group mb-6 sm:mb-12 bg-[#050C16]">
         <img
           src={activeImage}
           alt={`Gastronomía representativa de ${category.name} en DELICIAS A DE`}
@@ -88,24 +88,24 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
         {/* Optional 4K AI vs Real Photo View Toggle for sections with custom restaurant photos */}
         {category.originalImage && (
-          <div className="absolute top-4 sm:top-6 right-4 sm:right-6 z-10 flex items-center gap-1 p-1 rounded-full bg-[#081321]/85 backdrop-blur-md border border-[#C5A880]/40 shadow-xl">
+          <div className="absolute top-2.5 sm:top-6 right-2.5 sm:right-6 z-10 flex items-center gap-1 p-1 rounded-full bg-[#081321]/85 backdrop-blur-md border border-[#C5A880]/40 shadow-xl scale-90 sm:scale-100 origin-top-right">
             <button
               type="button"
               onClick={() => setShowAiEnhanced(true)}
-              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
                 showAiEnhanced
                   ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
                   : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
               }`}
               title="Ver imagen con optimización fotográfica 4K IA"
             >
-              <Sparkles className="w-3 h-3 fill-current" />
+              <Sparkles className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-current" />
               <span>Full 4K IA</span>
             </button>
             <button
               type="button"
               onClick={() => setShowAiEnhanced(false)}
-              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1 ${
                 !showAiEnhanced
                   ? 'bg-[#C5A880] text-[#081321] shadow-sm font-bold'
                   : 'text-[#D2C4B2] hover:text-[#FAF8F5]'
@@ -118,26 +118,26 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
         )}
 
         {/* Text Overlay inside the Panoramic Frame */}
-        <div className="absolute inset-0 p-6 sm:p-10 md:p-14 flex flex-col justify-end">
+        <div className="absolute inset-0 p-4 sm:p-10 md:p-14 flex flex-col justify-end">
           <div className="max-w-2xl">
             {/* Section Number & Kicker */}
-            <div className="flex items-center gap-3 mb-2">
-              <span className="font-mono text-xs sm:text-sm font-bold text-[#C5A880] tracking-[0.25em] uppercase px-3 py-1 rounded-md bg-[#081321]/85 border border-[#C5A880]/40 backdrop-blur-md shadow-lg">
+            <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
+              <span className="font-mono text-[10px] sm:text-sm font-bold text-[#C5A880] tracking-[0.2em] sm:tracking-[0.25em] uppercase px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-md bg-[#081321]/85 border border-[#C5A880]/40 backdrop-blur-md shadow-lg">
                 SECCIÓN {category.sectionNumber}
               </span>
-              <span className="h-px w-10 sm:w-16 bg-[#C5A880]/60" />
-              <span className="text-[11px] sm:text-xs text-[#FAF8F5]/90 uppercase tracking-widest font-medium hidden sm:inline drop-shadow">
+              <span className="h-px w-6 sm:w-16 bg-[#C5A880]/60" />
+              <span className="text-[10px] sm:text-xs text-[#FAF8F5]/90 uppercase tracking-widest font-medium hidden xs:inline drop-shadow">
                 {category.subtitle}
               </span>
             </div>
 
             {/* Category Title */}
-            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#FAF8F5] tracking-wide font-normal leading-tight drop-shadow-md">
+            <h2 className="font-serif text-2xl xs:text-3xl sm:text-5xl md:text-6xl text-[#FAF8F5] tracking-wide font-normal leading-tight drop-shadow-md">
               {category.name}
             </h2>
 
             {/* Tagline */}
-            <p className="text-xs sm:text-sm md:text-base text-[#E7DFD5] mt-2 font-light line-clamp-2 max-w-xl drop-shadow">
+            <p className="text-[11px] sm:text-sm md:text-base text-[#E7DFD5] mt-1 sm:mt-2 font-light line-clamp-2 max-w-xl drop-shadow">
               {category.tagline}
             </p>
           </div>
@@ -145,22 +145,22 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       </div>
 
       {/* 2. The Luxury Menu Sheet (Carta Gastronómica Elegante Sin Fotos en Cada Plato) */}
-      <div className="relative bg-[#0B192C]/90 border border-[#162C46] rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-14 shadow-2xl shadow-black/40">
+      <div className="relative bg-[#0B192C]/90 border border-[#162C46] rounded-2xl sm:rounded-3xl p-4 sm:p-10 md:p-14 shadow-2xl shadow-black/40">
         {/* Decorative Golden Corner Accents */}
-        <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-[#C5A880]/30 pointer-events-none rounded-tl-sm" />
-        <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[#C5A880]/30 pointer-events-none rounded-tr-sm" />
-        <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[#C5A880]/30 pointer-events-none rounded-bl-sm" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#C5A880]/30 pointer-events-none rounded-br-sm" />
+        <div className="hidden sm:block absolute top-4 left-4 w-6 h-6 border-t border-l border-[#C5A880]/30 pointer-events-none rounded-tl-sm" />
+        <div className="hidden sm:block absolute top-4 right-4 w-6 h-6 border-t border-r border-[#C5A880]/30 pointer-events-none rounded-tr-sm" />
+        <div className="hidden sm:block absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[#C5A880]/30 pointer-events-none rounded-bl-sm" />
+        <div className="hidden sm:block absolute bottom-4 right-4 w-6 h-6 border-b border-r border-[#C5A880]/30 pointer-events-none rounded-br-sm" />
 
         {/* Editorial Subheader before items */}
-        <div className="text-center pb-8 border-b border-[#162C46]/80 mb-6">
-          <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#C5A880]">
+        <div className="text-center pb-5 sm:pb-8 border-b border-[#162C46]/80 mb-5 sm:mb-6">
+          <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#C5A880]">
             CARTA OFICIAL &middot; DELICIAS A DE
           </span>
-          <h3 className="font-serif text-2xl sm:text-3xl text-[#FAF8F5] font-normal mt-1">
+          <h3 className="font-serif text-xl sm:text-3xl text-[#FAF8F5] font-normal mt-1">
             Platos y Especialidades de {category.name}
           </h3>
-          <p className="text-xs text-[#B8A58E] mt-1 italic font-serif">
+          <p className="text-[11px] sm:text-xs text-[#B8A58E] mt-1 italic font-serif">
             Elaborados al momento con ingredientes frescos del océano
           </p>
         </div>
@@ -185,31 +185,31 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-4">
                   {/* Left: Dish Name & Badges & Description */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                       <h4
                         onClick={() => onOpenModal(product)}
-                        className="font-serif text-lg sm:text-xl md:text-[21px] text-[#FAF8F5] font-medium tracking-wide group-hover:text-[#C5A880] transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                        className="font-serif text-base sm:text-xl md:text-[21px] text-[#FAF8F5] font-medium tracking-wide group-hover:text-[#C5A880] transition-colors cursor-pointer inline-flex items-center gap-1.5"
                       >
                         <span>{product.name}</span>
                       </h4>
 
                       {/* Featured or Specialty Tags */}
                       {product.featured && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30">
+                        <span className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30">
                           <Sparkles className="w-2.5 h-2.5 fill-current" />
                           <span>Destacado</span>
                         </span>
                       )}
 
                       {product.badge && (
-                        <span className="text-[10px] font-medium tracking-wider uppercase text-[#B8A58E] px-1.5 py-0.5 rounded bg-[#10223B]/80 border border-[#162C46]">
+                        <span className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-[#B8A58E] px-1.5 py-0.5 rounded bg-[#10223B]/80 border border-[#162C46]">
                           {product.badge}
                         </span>
                       )}
                     </div>
 
                     {/* Brief Elegant Description */}
-                    <p className="text-xs sm:text-[13px] text-[#D2C4B2]/80 leading-relaxed font-light mt-1 max-w-2xl">
+                    <p className="text-[11.5px] sm:text-[13px] text-[#D2C4B2]/80 leading-relaxed font-light mt-1 max-w-2xl">
                       {product.description}
                     </p>
                   </div>
@@ -218,25 +218,25 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   <div className="hidden md:block flex-1 border-b border-dotted border-[#183355]/80 mx-3 self-center" />
 
                   {/* Right: Price & Discrete Add Control */}
-                  <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0 mt-2 sm:mt-0">
+                  <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0 mt-2 sm:mt-0 pt-1.5 sm:pt-0 border-t border-[#162C46]/40 sm:border-t-0">
                     {/* Price Display */}
                     <div className="text-left sm:text-right">
                       {product.requiresPriceConfirmation ? (
                         <div className="flex flex-col items-start sm:items-end">
-                          <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#C5A880] flex items-center gap-1">
+                          <span className="text-[11px] sm:text-sm font-semibold uppercase tracking-wider text-[#C5A880] flex items-center gap-1">
                             <Scale className="w-3.5 h-3.5" />
                             <span>Precio según tamaño</span>
                           </span>
-                          <span className="text-[11px] text-[#B8A58E] italic">
+                          <span className="text-[10px] sm:text-[11px] text-[#B8A58E] italic">
                             Confirmación con cocina
                           </span>
                         </div>
                       ) : (
                         <div className="flex items-baseline gap-1">
-                          <span className="font-sans text-xl sm:text-2xl font-bold text-[#C5A880]">
+                          <span className="font-sans text-lg sm:text-2xl font-bold text-[#C5A880]">
                             ${product.price}
                           </span>
-                          <span className="text-xs text-[#B8A58E] font-normal">USD</span>
+                          <span className="text-[11px] sm:text-xs text-[#B8A58E] font-normal">USD</span>
                         </div>
                       )}
                     </div>
@@ -244,7 +244,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                     {/* Discrete Action Button */}
                     <button
                       onClick={(e) => handleQuickAdd(product, e)}
-                      className={`h-9 px-3.5 sm:px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer touch-manipulation shadow-sm ${
+                      className={`h-8.5 sm:h-9 px-3.5 sm:px-4 rounded-xl text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 cursor-pointer touch-manipulation shadow-sm ${
                         isItemAdded
                           ? 'bg-emerald-600 text-white shadow-emerald-950/40'
                           : 'bg-[#10223B] hover:bg-[#C5A880] text-[#FAF8F5] hover:text-[#081321] border border-[#C5A880]/35 hover:border-[#C5A880]'

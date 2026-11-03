@@ -68,11 +68,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout }) => {
         className="fixed inset-0 bg-[#050C16]/80 backdrop-blur-sm transition-opacity"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         {/* Drawer Panel */}
-        <aside className="w-screen max-w-md bg-[#081321] border-l border-[#C5A880]/30 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
+        <aside className="w-screen max-w-full sm:max-w-md bg-[#081321] border-l border-[#C5A880]/30 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
           {/* Header */}
-          <div className="p-5 sm:p-6 border-b border-[#162C46] flex items-center justify-between">
+          <div className="p-4 sm:p-6 border-b border-[#162C46] flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-[#10223B] border border-[#C5A880]/40 text-[#C5A880]">
                 <ShoppingBag className="w-5 h-5" />
@@ -233,7 +233,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout }) => {
 
           {/* Footer with Calculations & Checkout */}
           {cart.length > 0 && (
-            <div className="p-5 sm:p-6 border-t border-[#162C46] bg-[#050C16]/90 space-y-4">
+            <div className="p-4 sm:p-6 border-t border-[#162C46] bg-[#050C16]/95 space-y-3.5 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))]">
               {/* Notice for Lobster price confirmation */}
               {hasItemsWithPendingPrice && (
                 <div className="p-3 rounded-lg bg-[#10223B] border border-[#C5A880]/40 text-xs text-[#FAF8F5] flex items-start gap-2">

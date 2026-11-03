@@ -71,7 +71,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
   const totalPrice = product.price * quantity;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
       {/* Dark backdrop */}
       <div
         onClick={onClose}
@@ -79,18 +79,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative bg-[#081321] border border-[#C5A880]/40 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl z-10 my-4 sm:my-8 animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative bg-[#081321] border border-[#C5A880]/40 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl z-10 my-2 sm:my-8 animate-in fade-in zoom-in-95 duration-200">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-[#081321]/80 hover:bg-[#10223B] text-[#FAF8F5] border border-[#C5A880]/30 transition-colors"
+          className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 p-2 rounded-full bg-[#081321]/80 hover:bg-[#10223B] text-[#FAF8F5] border border-[#C5A880]/30 transition-colors cursor-pointer"
           aria-label="Cerrar detalle del plato"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {/* Dish Picture */}
-        <div className="relative h-60 sm:h-72 w-full overflow-hidden bg-black">
+        <div className="relative h-44 xs:h-52 sm:h-72 w-full overflow-hidden bg-black">
           <img
             src={product.image}
             alt={product.name}
@@ -99,15 +99,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#081321] via-transparent to-black/30" />
 
-          <div className="absolute bottom-4 left-6 flex flex-wrap gap-2">
+          <div className="absolute bottom-3 left-4 sm:bottom-4 sm:left-6 flex flex-wrap gap-1.5 sm:gap-2">
             {product.featured && (
-              <div className="bg-[#C5A880] text-[#081321] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-lg flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 fill-current" />
+              <div className="bg-[#C5A880] text-[#081321] text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-sm shadow-lg flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" />
                 <span>Destacado</span>
               </div>
             )}
             {product.badge && (
-              <div className="bg-[#081321]/90 border border-[#C5A880]/60 text-[#C5A880] text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-sm shadow-lg">
+              <div className="bg-[#081321]/90 border border-[#C5A880]/60 text-[#C5A880] text-[10px] sm:text-xs font-semibold uppercase tracking-widest px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-sm shadow-lg">
                 {product.badge}
               </div>
             )}
@@ -115,14 +115,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
         </div>
 
         {/* Modal Content */}
-        <div className="p-5 sm:p-8">
+        <div className="p-4 sm:p-8">
           {/* Header & Price */}
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 sm:gap-3 mb-3 sm:mb-4">
             <div>
-              <span className="text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
                 DELICIAS A DE &middot; CARTA OFICIAL
               </span>
-              <h3 className="font-serif text-2xl sm:text-3xl text-[#FAF8F5] font-medium mt-1">
+              <h3 className="font-serif text-xl xs:text-2xl sm:text-3xl text-[#FAF8F5] font-medium mt-0.5 sm:mt-1">
                 {product.name}
               </h3>
             </div>
@@ -264,7 +264,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               placeholder="Ej: Acompañado de patacones, salsa aparte, etc..."
-              className="w-full px-3.5 py-2.5 rounded-lg bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-sm text-[#FAF8F5] placeholder-[#B8A58E]/50 outline-none transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-lg bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/50 outline-none transition-colors"
             />
           </div>
 

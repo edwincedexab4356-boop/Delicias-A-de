@@ -202,11 +202,11 @@ function MenuContent() {
       {/* Floating Action Button for Cart (Mobile & Desktop) */}
       {totalItems > 0 && (
         <>
-          {/* Mobile bottom bar */}
-          <div className="fixed bottom-5 inset-x-4 sm:hidden z-30 animate-in slide-in-from-bottom-4">
+          {/* Mobile bottom bar with safe-area spacing */}
+          <div className="fixed bottom-4 inset-x-3 sm:hidden z-30 animate-in slide-in-from-bottom-4 pb-[env(safe-area-inset-bottom,0px)]">
             <button
               onClick={() => setIsCartOpen(true)}
-              className="w-full py-3.5 px-6 rounded-full bg-[#C5A880] text-[#081321] font-bold text-xs uppercase tracking-wider shadow-2xl shadow-black/80 flex items-center justify-between cursor-pointer active:scale-98"
+              className="w-full py-3.5 px-5 rounded-2xl bg-[#C5A880] text-[#081321] font-bold text-xs uppercase tracking-wider shadow-2xl shadow-black/80 flex items-center justify-between cursor-pointer active:scale-98 touch-manipulation border border-[#D8BD93]"
             >
               <div className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4" />

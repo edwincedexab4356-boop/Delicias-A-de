@@ -62,16 +62,16 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Brand Logo & Name */}
           <a
             href="#"
-            className="flex flex-col group focus:outline-none"
+            className="flex flex-col group focus:outline-none min-w-0"
             aria-label="DELICIAS A DE - Inicio"
           >
-            <div className="flex items-center gap-2">
-              <span className="text-[#C5A880] tracking-[0.25em] text-xs font-semibold uppercase">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-[#C5A880] tracking-[0.2em] sm:tracking-[0.25em] text-[10px] sm:text-xs font-semibold uppercase">
                 Restaurante Costero
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880]/60 inline-block"></span>
+              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#C5A880]/60 inline-block"></span>
             </div>
-            <span className="font-serif text-2xl sm:text-3xl tracking-[0.08em] font-medium text-[#FAF8F5] group-hover:text-[#C5A880] transition-colors">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl tracking-[0.06em] sm:tracking-[0.08em] font-medium text-[#FAF8F5] group-hover:text-[#C5A880] transition-colors truncate">
               DELICIAS A DE
             </span>
           </a>
@@ -100,17 +100,17 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right Actions: Search + Cart + Mobile Toggle */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
             {/* Search Input Toggle */}
             <div className="relative flex items-center">
               {isSearchOpen ? (
-                <div className="flex items-center bg-[#10223B]/90 border border-[#C5A880]/40 rounded-full px-3 py-1.5 text-xs text-[#FAF8F5] w-48 sm:w-64 transition-all">
-                  <Search className="w-3.5 h-3.5 text-[#C5A880] mr-2 shrink-0" />
+                <div className="flex items-center bg-[#10223B]/95 border border-[#C5A880]/50 rounded-full px-2.5 sm:px-3 py-1.5 text-xs text-[#FAF8F5] w-36 xs:w-48 sm:w-64 transition-all shadow-lg">
+                  <Search className="w-3.5 h-3.5 text-[#C5A880] mr-1.5 shrink-0" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
-                    placeholder="Buscar plato, ingrediente..."
+                    placeholder="Buscar plato..."
                     autoFocus
                     className="bg-transparent border-none outline-none text-xs text-[#FAF8F5] placeholder-[#B8A58E]/60 w-full"
                   />
@@ -119,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({
                       setIsSearchOpen(false);
                       onSearchChange('');
                     }}
-                    className="text-[#D2C4B2] hover:text-[#FAF8F5] p-0.5"
+                    className="text-[#D2C4B2] hover:text-[#FAF8F5] p-1 cursor-pointer"
                     aria-label="Cerrar búsqueda"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -128,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <button
                   onClick={() => setIsSearchOpen(true)}
-                  className="p-2 text-[#D2C4B2] hover:text-[#C5A880] transition-colors rounded-full hover:bg-[#10223B]/60"
+                  className="p-2 text-[#D2C4B2] hover:text-[#C5A880] transition-colors rounded-full hover:bg-[#10223B]/60 cursor-pointer"
                   aria-label="Abrir buscador"
                 >
                   <Search className="w-4 h-4" />
