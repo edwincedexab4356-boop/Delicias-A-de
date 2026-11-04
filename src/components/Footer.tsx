@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
               <span>Ubicación</span>
             </h4>
             <div className="text-xs text-[#D2C4B2]/90 space-y-2 font-light leading-relaxed">
-              <p className="text-[#FAF8F5] font-medium">Restaurante DELICIAS A DE</p>
+              <p className="text-[#FAF8F5] font-medium">Restaurante DELICIAS ADE</p>
               <p className="text-[#B8A58E]">
                 Frente a la costa marina con brisa y terraza con vista al mar.
               </p>

@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
           <a
             href="#"
             className="flex flex-col group focus:outline-none min-w-0"
-            aria-label="DELICIAS A DE - Inicio"
+            aria-label="DELICIAS ADE - Inicio"
           >
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="text-[#C5A880] tracking-[0.2em] sm:tracking-[0.25em] text-[10px] sm:text-xs font-semibold uppercase">
@@ -72,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#C5A880]/60 inline-block"></span>
             </div>
             <span className="font-serif text-xl sm:text-2xl md:text-3xl tracking-[0.06em] sm:tracking-[0.08em] font-medium text-[#FAF8F5] group-hover:text-[#C5A880] transition-colors truncate">
-              DELICIAS A DE
+              DELICIAS ADE
             </span>
           </a>
 
@@ -206,7 +206,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div className="mt-6 pt-4 border-t border-[#183355] flex items-center justify-between text-xs text-[#B8A58E]">
             <span>Pesca Fresca Diaria</span>
-            <span className="text-[#C5A880]">DELICIAS A DE</span>
+            <span className="text-[#C5A880]">DELICIAS ADE</span>
           </div>
         </div>
       )}

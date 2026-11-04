@@ -1,5 +1,5 @@
 /**
- * CONFIGURACIÓN DE PEDIDOS Y CONTACTO - DELICIAS A DE
+ * CONFIGURACIÓN DE PEDIDOS Y CONTACTO - DELICIAS ADE
  */
 
 // Teléfono oficial de WhatsApp para pedidos (wa.me: país 507 + 60292142)
@@ -19,4 +19,4 @@ export const RESTAURANT_SCHEDULE = 'Jueves a Domingo de 6:30 a 9:00';
 export const RESTAURANT_RESERVATION_NOTICE =
   'Atención exclusiva por reserva previa. Cada orden se pesca directamente del mar para cada comensal, garantizando frescura insuperable. Por favor avisa antes de llegar.';
 
-export const RESTAURANT_NAME = 'DELICIAS A DE';
+export const RESTAURANT_NAME = 'DELICIAS ADE';

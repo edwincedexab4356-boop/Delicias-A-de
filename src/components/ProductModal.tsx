@@ -123,7 +123,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 sm:gap-3 mb-3 sm:mb-4">
             <div>
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
-                DELICIAS A DE &middot; CARTA OFICIAL
+                DELICIAS ADE &middot; CARTA OFICIAL
               </span>
               <h3 className="font-serif text-xl xs:text-2xl sm:text-3xl text-[#FAF8F5] font-medium mt-0.5 sm:mt-1">
                 {product.name}

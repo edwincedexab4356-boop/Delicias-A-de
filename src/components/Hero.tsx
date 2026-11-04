@@ -12,7 +12,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
       <div className="absolute inset-0 z-0">
         <img
           src="/assets/aistudio/WhatsApp_Image_2026-11-03_at_02.34.27__1__c4feba61.jpeg"
-          alt="Alta gastronomía y terraza frente al mar en DELICIAS A DE"
+          alt="Alta gastronomía y terraza frente al mar en DELICIAS ADE"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover object-center scale-105 filter brightness-[0.62] contrast-[1.08]"
         />
@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Main Restaurant Brand Name */}
         <h1 className="font-serif text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.05em] sm:tracking-[0.06em] text-[#FAF8F5] leading-[1.12] sm:leading-[1.08] mb-3 sm:mb-4">
-          DELICIAS A DE
+          DELICIAS ADE
         </h1>
 
         {/* Mandatory Tagline */}

@@ -75,7 +75,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       <div className="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[24/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#C5A880]/35 group mb-6 sm:mb-12 bg-[#050C16]">
         <img
           src={activeImage}
-          alt={`Gastronomía representativa de ${category.name} en DELICIAS A DE`}
+          alt={`Gastronomía representativa de ${category.name} en DELICIAS ADE`}
           referrerPolicy="no-referrer"
           loading="eager"
           onError={(e) => {
@@ -130,7 +130,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
         {/* Editorial Subheader before items */}
         <div className="text-center pb-5 sm:pb-8 border-b border-[#162C46]/80 mb-5 sm:mb-6">
           <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#C5A880]">
-            CARTA OFICIAL &middot; DELICIAS A DE
+            CARTA OFICIAL &middot; DELICIAS ADE
           </span>
           <h3 className="font-serif text-xl sm:text-3xl text-[#FAF8F5] font-normal mt-1">
             Platos y Especialidades de {category.name}
