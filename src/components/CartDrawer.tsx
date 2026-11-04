@@ -270,6 +270,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout }) => {
                         + Langosta por confirmar
                       </span>
                     )}
+                    <span className="text-[10px] text-[#C5A880]/90 block mt-0.5">
+                      Efectivo en local &middot; Yappy (6293-8233)
+                    </span>
                   </div>
                 </div>
               </div>

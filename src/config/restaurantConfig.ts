@@ -1,21 +1,22 @@
 /**
  * CONFIGURACIÓN DE PEDIDOS Y CONTACTO - DELICIAS A DE
- * 
- * Introduce aquí el número de teléfono oficial de WhatsApp del restaurante.
- * REQUISITOS OBLIGATORIOS PARA wa.me:
- * - Debe incluir código de país internacional.
- * - NO incluir el signo '+'.
- * - NO incluir espacios.
- * - NO incluir guiones ni paréntesis.
- * 
- * Ejemplos:
- * - Panamá: '50761234567'
- * - Colombia: '573001234567'
- * - México: '5215512345678'
- * - Estados Unidos: '13051234567'
  */
 
-// VARIABLE DE CONFIGURACIÓN DEL WHATSAPP OFICIAL:
-export const RESTAURANT_WHATSAPP_PHONE = '50700000000'; // <-- Reemplazar por el número de WhatsApp oficial del restaurante
+// Teléfono oficial de WhatsApp para pedidos (wa.me: país 507 + 60292142)
+export const RESTAURANT_WHATSAPP_PHONE = '50760292142';
+export const RESTAURANT_WHATSAPP_DISPLAY = '6029-2142';
+
+// Número oficial de Yappy para pagos
+export const RESTAURANT_YAPPY_PHONE = '6293-8233';
+
+// Enlace de Google Maps de la ubicación
+export const RESTAURANT_MAPS_URL = 'https://maps.app.goo.gl/6qiWAuoKAocAvjkU7';
+
+// Horario oficial de atención
+export const RESTAURANT_SCHEDULE = 'Jueves a Domingo de 6:30 a 9:00';
+
+// Política de atención por reserva previa y pesca fresca
+export const RESTAURANT_RESERVATION_NOTICE =
+  'Atención exclusiva por reserva previa. Cada orden se pesca directamente del mar para cada comensal, garantizando frescura insuperable. Por favor avisa antes de llegar.';
 
 export const RESTAURANT_NAME = 'DELICIAS A DE';

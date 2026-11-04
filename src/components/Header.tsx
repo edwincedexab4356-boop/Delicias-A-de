@@ -97,6 +97,12 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
               );
             })}
+            <a
+              href="#apartado-reservas"
+              className="px-3.5 py-1.5 text-xs uppercase tracking-wider font-semibold text-[#C5A880] hover:text-[#FAF8F5] transition-colors"
+            >
+              Reservas
+            </a>
           </nav>
 
           {/* Right Actions: Search + Cart + Mobile Toggle */}
@@ -188,6 +194,14 @@ export const Header: React.FC<HeaderProps> = ({
                 <Compass className="w-4 h-4 opacity-40" />
               </button>
             ))}
+            <a
+              href="#apartado-reservas"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between text-left py-2.5 px-3 rounded-lg text-sm tracking-wide font-semibold text-[#C5A880] bg-[#10223B]/70 border border-[#C5A880]/30 hover:bg-[#183355]"
+            >
+              <span>Reservas, Horarios y Ubicación</span>
+              <span className="text-[10px] uppercase tracking-wider bg-[#C5A880] text-[#081321] px-1.5 py-0.5 rounded font-bold">Info</span>
+            </a>
           </div>
 
           <div className="mt-6 pt-4 border-t border-[#183355] flex items-center justify-between text-xs text-[#B8A58E]">

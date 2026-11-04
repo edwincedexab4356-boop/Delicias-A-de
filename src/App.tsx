@@ -7,6 +7,7 @@ import { MenuSection } from './components/MenuSection';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { OrderConfirmationModal } from './components/OrderConfirmationModal';
+import { ReservationSection } from './components/ReservationSection';
 import { Footer } from './components/Footer';
 import { CATEGORIES, PRODUCTS } from './data/menuData';
 import { CategoryId, Product } from './types';
@@ -198,6 +199,9 @@ function MenuContent() {
           </div>
         </div>
       </main>
+
+      {/* Apartado Especial: Reservas, Pesca Fresca, Horarios y Ubicación */}
+      <ReservationSection />
 
       {/* Floating Action Button for Cart (Mobile & Desktop) */}
       {totalItems > 0 && (

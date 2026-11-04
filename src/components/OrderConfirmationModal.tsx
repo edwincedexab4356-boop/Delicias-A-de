@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { RESTAURANT_WHATSAPP_PHONE, RESTAURANT_NAME } from '../config/restaurantConfig';
+import {
+  RESTAURANT_WHATSAPP_PHONE,
+  RESTAURANT_WHATSAPP_DISPLAY,
+  RESTAURANT_YAPPY_PHONE,
+  RESTAURANT_NAME,
+} from '../config/restaurantConfig';
 import {
   X,
   CheckCircle,
@@ -11,6 +16,10 @@ import {
   Scale,
   User,
   FileText,
+  Wallet,
+  Banknote,
+  Smartphone,
+  ShieldAlert,
 } from 'lucide-react';
 
 interface OrderConfirmationModalProps {
@@ -27,6 +36,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [diningOption, setDiningOption] = useState<'comer-en-el-lugar' | 'retirar-en-el-local'>('comer-en-el-lugar');
+  const [paymentMethod, setPaymentMethod] = useState<'efectivo' | 'yappy'>('efectivo');
   const [orderNotes, setOrderNotes] = useState('');
 
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
@@ -90,12 +100,18 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
         ? 'Comer en el lugar'
         : 'Retirar en el local';
 
+    const metodoPagoText =
+      paymentMethod === 'efectivo'
+        ? 'Efectivo (en el local)'
+        : `Yappy (al ${RESTAURANT_YAPPY_PHONE} - enviaré comprobante)`;
+
     // Base order message
     let message = `${RESTAURANT_NAME} - NUEVO PEDIDO
 
 Cliente: ${customerName.trim()}
 Teléfono: ${customerPhone.trim()}
 Modalidad: ${modalidadText}
+Método de pago: ${metodoPagoText}
 
 DETALLE:
 ${detailLines}
@@ -164,20 +180,43 @@ TOTAL: ${formattedTotal}`;
               <p className="text-xs text-[#B8A58E] mt-1 font-mono">Orden de Referencia: #{orderId}</p>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#D2C4B2] max-w-md mx-auto leading-relaxed font-light">
-              Tu pedido ha sido preformateado y enviado a la línea oficial de WhatsApp de{' '}
-              <strong className="text-[#C5A880]">{RESTAURANT_NAME}</strong>. Nuestro equipo de cocina
-              te confirmará la recepción y los tiempos estimados de preparación.
-            </p>
+            {/* Payment reminder if Yappy was selected */}
+            {paymentMethod === 'yappy' ? (
+              <div className="p-4 rounded-xl bg-[#10223B] border-2 border-[#C5A880] text-left text-xs max-w-lg mx-auto space-y-1.5">
+                <div className="flex items-center gap-2 text-[#C5A880] font-semibold">
+                  <Smartphone className="w-4 h-4" />
+                  <span>Recordatorio de Pago por Yappy</span>
+                </div>
+                <p className="text-[#FAF8F5]">
+                  Has seleccionado pago por Yappy al:{' '}
+                  <span className="font-mono font-bold text-[#C5A880] text-sm">{RESTAURANT_YAPPY_PHONE}</span>
+                </p>
+                <p className="text-[#B8A58E] text-[11px]">
+                  Por favor adjunta la captura o comprobante de tu transferencia en el chat de WhatsApp que se acaba de abrir ({RESTAURANT_WHATSAPP_DISPLAY}).
+                </p>
+              </div>
+            ) : (
+              <p className="text-xs sm:text-sm text-[#D2C4B2] max-w-md mx-auto leading-relaxed font-light">
+                Tu pedido ha sido preformateado y enviado a la línea oficial de WhatsApp de{' '}
+                <strong className="text-[#C5A880]">{RESTAURANT_NAME}</strong>. Recuerda que pagarás en
+                efectivo en el local al recibir tu comida fresca.
+              </p>
+            )}
 
             {/* Order summary snapshot */}
             <div className="p-4 rounded-xl bg-[#0B192C] border border-[#162C46] text-left text-xs space-y-2.5 max-w-lg mx-auto">
               <div className="flex justify-between font-medium text-[#FAF8F5] pb-2 border-b border-[#162C46]">
-                <span>Modalidad seleccionada</span>
+                <span>Modalidad</span>
                 <span className="text-[#C5A880] font-semibold">
                   {diningOption === 'comer-en-el-lugar'
                     ? 'Comer en el lugar'
                     : 'Retirar en el local'}
+                </span>
+              </div>
+              <div className="flex justify-between font-medium text-[#FAF8F5] pb-2 border-b border-[#162C46]">
+                <span>Método de pago</span>
+                <span className="text-[#FAF8F5] font-semibold">
+                  {paymentMethod === 'efectivo' ? 'Efectivo en el local' : `Yappy (${RESTAURANT_YAPPY_PHONE})`}
                 </span>
               </div>
               <div className="space-y-1.5 text-[#D2C4B2] max-h-36 overflow-y-auto">
@@ -219,6 +258,19 @@ TOTAL: ${formattedTotal}`;
         ) : (
           /* Checkout Form & Order Summary */
           <form onSubmit={handleSendWhatsApp} className="p-5 sm:p-8 space-y-6">
+            {/* Global reservation reminder banner */}
+            <div className="p-3.5 rounded-xl bg-[#10223B]/90 border border-[#C5A880]/40 text-xs text-[#E7DFD5] flex items-start gap-2.5">
+              <ShieldAlert className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
+              <div className="leading-snug">
+                <span className="font-semibold text-[#C5A880] block mb-0.5">
+                  Atención exclusiva por reserva previa:
+                </span>
+                <span className="text-[#D2C4B2]">
+                  Pescamos directamente del mar para ti. Por favor coordina tu hora de llegada con cocina para tener tu pescado recién sacado del agua.
+                </span>
+              </div>
+            </div>
+
             {/* Global validation message if empty */}
             {validationErrors.cart && (
               <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-500/50 text-xs text-rose-300 flex items-center gap-2">
@@ -285,7 +337,7 @@ TOTAL: ${formattedTotal}`;
                         setValidationErrors((prev) => ({ ...prev, phone: '' }));
                       }
                     }}
-                    placeholder="Ej: +507 6123-4567"
+                    placeholder="Ej: 6123-4567"
                     className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors ${
                       validationErrors.phone
                         ? 'border-rose-500 focus:border-rose-400'
@@ -301,7 +353,7 @@ TOTAL: ${formattedTotal}`;
               </div>
             </div>
 
-            {/* 2. Modalidad de Entrega */}
+            {/* 2. Modalidad del Pedido */}
             <div className="space-y-4 pt-2 border-t border-[#162C46]">
               <h4 className="text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold flex items-center gap-2">
                 <Store className="w-4 h-4" />
@@ -327,7 +379,7 @@ TOTAL: ${formattedTotal}`;
                     <span>Comer en el lugar</span>
                   </div>
                   <span className="text-[11px] text-[#B8A58E] font-light">
-                    Servicio en salón o terraza
+                    Mesa en terraza frente al mar
                   </span>
                 </button>
 
@@ -349,10 +401,97 @@ TOTAL: ${formattedTotal}`;
                     <span>Retirar en el local</span>
                   </div>
                   <span className="text-[11px] text-[#B8A58E] font-light">
-                    Para llevar / Pick-up en barra
+                    Para llevar / Pick-up en el restaurante
                   </span>
                 </button>
               </div>
+            </div>
+
+            {/* 3. Métodos de Pago */}
+            <div className="space-y-4 pt-2 border-t border-[#162C46]">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold flex items-center gap-2">
+                  <Wallet className="w-4 h-4" />
+                  <span>3. Método de Pago</span>
+                </h4>
+                <span className="text-[11px] text-[#B8A58E]">2 opciones disponibles</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Opción 1: Efectivo */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('efectivo')}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
+                    paymentMethod === 'efectivo'
+                      ? 'bg-[#10223B] border-[#C5A880] shadow-md ring-1 ring-[#C5A880]/40'
+                      : 'bg-[#0B192C] border-[#183355] hover:border-[#C5A880]/40'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-semibold text-[#FAF8F5]">
+                      <Banknote
+                        className={`w-4 h-4 ${
+                          paymentMethod === 'efectivo' ? 'text-emerald-400' : 'text-[#B8A58E]'
+                        }`}
+                      />
+                      <span>1. En efectivo</span>
+                    </div>
+                    {paymentMethod === 'efectivo' && (
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    )}
+                  </div>
+                  <span className="text-[11px] text-[#B8A58E] font-light">
+                    Pagas en efectivo directamente en el local
+                  </span>
+                </button>
+
+                {/* Opción 2: Yappy */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('yappy')}
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
+                    paymentMethod === 'yappy'
+                      ? 'bg-[#10223B] border-[#C5A880] shadow-md ring-1 ring-[#C5A880]/40'
+                      : 'bg-[#0B192C] border-[#183355] hover:border-[#C5A880]/40'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-semibold text-[#FAF8F5]">
+                      <Smartphone
+                        className={`w-4 h-4 ${
+                          paymentMethod === 'yappy' ? 'text-[#C5A880]' : 'text-[#B8A58E]'
+                        }`}
+                      />
+                      <span>2. Por Yappy</span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-[#C5A880] bg-[#C5A880]/15 px-1.5 py-0.5 rounded">
+                      {RESTAURANT_YAPPY_PHONE}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-[#B8A58E] font-light">
+                    Enviar comprobante por WhatsApp
+                  </span>
+                </button>
+              </div>
+
+              {/* Indicación visual cuando se selecciona Yappy */}
+              {paymentMethod === 'yappy' && (
+                <div className="p-3 rounded-xl bg-[#10223B] border border-[#C5A880]/40 text-xs text-[#FAF8F5] space-y-1 animate-in fade-in">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-[#C5A880] flex items-center gap-1.5">
+                      <Smartphone className="w-3.5 h-3.5" />
+                      Número de Yappy para transferir:
+                    </span>
+                    <span className="font-mono font-bold text-sm text-[#FAF8F5] bg-[#081321] px-2 py-0.5 rounded border border-[#162C46]">
+                      {RESTAURANT_YAPPY_PHONE}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-[#D2C4B2] leading-tight">
+                    * Al presionar &ldquo;Enviar pedido por WhatsApp&rdquo;, por favor adjunta la captura o comprobante de tu transferencia Yappy en el chat.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Observaciones adicionales */}
@@ -369,16 +508,16 @@ TOTAL: ${formattedTotal}`;
                 rows={2}
                 value={orderNotes}
                 onChange={(e) => setOrderNotes(e.target.value)}
-                placeholder="Ej: Salsa aparte, llamar al llegar, especificaciones, etc..."
+                placeholder="Ej: Salsa aparte, hora estimada de llegada, especificaciones, etc..."
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B192C] border border-[#183355] focus:border-[#C5A880] text-base sm:text-sm text-[#FAF8F5] placeholder-[#B8A58E]/40 outline-none transition-colors resize-none"
               />
             </div>
 
-            {/* 3. RESUMEN DEL PEDIDO */}
+            {/* 4. RESUMEN DEL PEDIDO */}
             <div className="space-y-3 pt-3 border-t border-[#162C46]">
               <div className="flex items-center justify-between">
                 <h4 className="text-xs uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
-                  3. Resumen del Pedido
+                  4. Resumen del Pedido
                 </h4>
                 <span className="text-[11px] text-[#B8A58E]">
                   {cart.length} {cart.length === 1 ? 'producto' : 'productos'}
@@ -459,7 +598,12 @@ TOTAL: ${formattedTotal}`;
                   <span className="text-xs font-serif text-[#FAF8F5] font-semibold block">
                     TOTAL ESTIMADO
                   </span>
-                  <span className="text-[11px] text-[#B8A58E]">Sin cargos ocultos ni comisiones</span>
+                  <span className="text-[11px] text-[#B8A58E]">
+                    Método:{' '}
+                    <span className="text-[#FAF8F5] font-medium">
+                      {paymentMethod === 'efectivo' ? 'Efectivo en el local' : 'Yappy (6293-8233)'}
+                    </span>
+                  </span>
                 </div>
                 <div className="text-right">
                   <span className="text-xl sm:text-2xl font-bold font-sans text-[#C5A880]">
@@ -474,7 +618,7 @@ TOTAL: ${formattedTotal}`;
               </div>
             </div>
 
-            {/* 4. BOTÓN WHATSAPP */}
+            {/* 5. BOTÓN WHATSAPP */}
             <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
               <button
                 type="button"

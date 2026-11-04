@@ -55,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick }) => {
           </button>
 
           <a
-            href="#footer-section"
+            href="#apartado-reservas"
             className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-[#10223B]/80 hover:bg-[#183355] text-[#FAF8F5] border border-[#C5A880]/40 hover:border-[#C5A880] font-medium text-xs sm:text-sm uppercase tracking-[0.15em] transition-all duration-300 flex items-center justify-center gap-2"
           >
             <Clock className="w-4 h-4 text-[#C5A880]" />
